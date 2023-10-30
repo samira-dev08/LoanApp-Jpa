@@ -1,0 +1,16 @@
+server:
+  port: 8085
+
+spring:
+  datasource:
+      driverClassName: com.mysql.cj.jdbc.Driver
+      url: jdbc:mysql://localhost:3306/loanverify
+      username: root
+      password: Galata97
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+
+
