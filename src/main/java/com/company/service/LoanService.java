@@ -36,12 +36,12 @@ public class LoanService {
                 .orElseThrow(() -> new NotFoundException("Not found Loan"));
        List<BigDecimal> priceList= productService.getProductPriceByLoanId(loanId).get();
         BigDecimal totalAmount = BigDecimal.ZERO;
-        BigDecimal result=BigDecimal.ZERO;
+        //BigDecimal result=BigDecimal.ZERO;
         for (BigDecimal price : priceList) {
-            result=totalAmount.add(totalAmount.add(price));
+            totalAmount.add(price);
         }
-        BigDecimal preAmount = result.multiply(BigDecimal.valueOf(PRE_AMOUNT_PERCENT / 100));
-        loan.setTotalAmount(result);
+        BigDecimal preAmount = totalAmount.multiply(BigDecimal.valueOf(PRE_AMOUNT_PERCENT / 100));
+        loan.setTotalAmount(totalAmount);
         loan.setPreAmount(preAmount);
         loanRepository.save(loan);
 

@@ -6,6 +6,7 @@ import com.company.dto.request.PersonalInfoRequest;
 import com.company.service.CreditorService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -15,6 +16,7 @@ public class CreditorController {
     private final CreditorService creditorService;
 
     @PostMapping("/check-identity")
+    //@PreAuthorize(value = "hasAuthority('CREDITOR')")
     public ResponseEntity<String> checkIdentity(@RequestBody PassportInfoRequest passInfo) {
         creditorService.checkIdentity(passInfo);
         return ResponseEntity.ok("Identity checked successfully.");

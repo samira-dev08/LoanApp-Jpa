@@ -1,5 +1,6 @@
 package com.company.service;
 
+import com.company.dto.response.CustomerResponse;
 import com.company.entity.Customer;
 import com.company.entity.TransactionDetails;
 import com.company.dto.request.PassportInfoRequest;
@@ -13,7 +14,9 @@ import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -23,7 +26,12 @@ public class CustomerService {
     private final CustomerMapper customerMapper;
     private final TransactionRepository transactionRepository;
 
-
+public List<CustomerResponse> allCustomers(){
+   List<Customer> customers= customerRepository.findAll();
+      return customers.stream()
+              .map(customer -> customerMapper.toCustomerResponse(customer))
+              .collect(Collectors.toList());
+}
 
 
 }
